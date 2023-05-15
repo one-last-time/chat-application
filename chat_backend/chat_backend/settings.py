@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 third_party_apps = [
-
+    'daphne'
 ]
 django_apps = [
     'django.contrib.admin',
@@ -82,6 +82,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chat_backend.wsgi.application'
+ASGI_APPLICATION = 'chat_backend.asgi.application'
 
 
 # Database
