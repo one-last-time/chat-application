@@ -19,7 +19,9 @@
             + roomName
             + '/'
         );
-
+        chatSocket.onopen = function (e){
+            console.log("connected")
+        }
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             document.querySelector('#chat-log').value += (data.message + '\n');
