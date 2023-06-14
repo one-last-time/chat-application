@@ -16,12 +16,13 @@ from django.core.asgi import get_asgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chat_backend.settings')
 
 from .routing import websocket_urlpatterns
+from authentication.middleware import TokenAuthMiddlewareStack
 
 application = ProtocolTypeRouter(
     {
         'http': get_asgi_application(),
         "websocket": AllowedHostsOriginValidator(
-            AuthMiddlewareStack(URLRouter(websocket_urlpatterns))
+            TokenAuthMiddlewareStack(URLRouter(websocket_urlpatterns))
         )
     }
 )

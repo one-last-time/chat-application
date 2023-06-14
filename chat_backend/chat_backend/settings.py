@@ -30,12 +30,14 @@ SECRET_KEY =os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 third_party_apps = [
-    'daphne'
+    'daphne',
+    'rest_framework',
+    'rest_framework_simplejwt'
 ]
 django_apps = [
     'django.contrib.admin',
@@ -47,7 +49,8 @@ django_apps = [
 ]
 
 custom_apps = [
-    'text_chat'
+    'text_chat',
+    'authentication'
 ]
 
 
@@ -81,7 +84,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'chat_backend.wsgi.application'
 ASGI_APPLICATION = 'chat_backend.asgi.application'
 
 
@@ -145,4 +147,10 @@ CHANNEL_LAYERS = {
             "hosts": [(os.environ.get('REDIS_HOST'), os.environ.get('REDIS_PORT'))],
         },
     },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }

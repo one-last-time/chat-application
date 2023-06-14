@@ -19,8 +19,15 @@ from django.urls import path
 
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+
+auth_urls = [
+    path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+]
 
 urlpatterns = [
     path("chat/", include("text_chat.urls")),
     path("admin/", admin.site.urls),
-]
+]+ auth_urls
